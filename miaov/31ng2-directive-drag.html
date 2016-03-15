@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+#div1{ width:100px; height:100px; background:red; position:absolute;}
+</style>
+<script src="jquery-1.11.1.js"></script>
+<script src="angular.min.js"></script>
+<script>
+    var m1 = angular.module('myApp', []);
+    m1.directive('myDrag', function() {
+        return {
+            restrict: 'A',
+            controller: ['$scope', function($scope){
+
+            }],
+            link: function(scope, element, attr) {
+                var disX = 0;
+                var disY = 0;
+                attr.myDrag = angular.equals(attr.myDrag, 'true');
+                console.log(typeof attr.myDrag);    //boolean
+                element.on('mousedown',function(ev) {
+                    var This = this;
+                    disX = ev.pageX - $(This).offset().left;
+                    disY = ev.pageY - $(This).offset().top;
+
+                    if (attr.myDrag) {
+                        var d = $('<div></div>');
+                        $('body').append(d);
+                        d.css({'width': $(this).width(), 'height': $(this).height(), 'border': '1px dotted #ccc','position': 'absolute', 'top': $(this).offset().top, 'left': $(this).offset().left});
+                    }
+
+                    $(document).on('mousemove',function(ev) {
+                        if (attr.myDrag) {
+                            d.css('left', ev.pageX-disX);
+                            d.css('top', ev.pageY-disY);
+                        } else {
+                            $(This).css('left', ev.pageX-disX);
+                            $(This).css('top', ev.pageY-disY);
+                        }
+                    });
+
+                    $(document).on('mouseup',function() {
+                        $(document).off();
+                        if (attr.myDrag) {
+                            $(This).css('left', d.offset().left);
+                            $(This).css('top', d.offset().top);
+                            d.remove();
+                        }
+                    });
+
+                    return false;
+                });
+            }
+        }
+    });
+
+
+</script>
+</head>
+
+<body>
+
+<div id="div1" my-drag="true"></div>
+
+</body>
+</html>

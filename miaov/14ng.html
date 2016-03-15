@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+</style>
+<script src="angular.min.js"></script>
+<script>
+
+var m1 = angular.module('myApp',[]);
+m1.controller('Aaa',['$scope','$filter',function($scope,$filter){
+	
+	var oriArr = [
+		{ name : "red" , age : "20" },
+		{ name : "yellow" , age : "40" },
+		{ name : "blue" , age : "30" },
+		{ name : "green" , age : "10" }
+	];
+	
+	$scope.dataList = oriArr;
+
+	$scope.fnSort = function(arg){
+        console.log(arguments.callee['fnSort'+arg]);    //undefined
+		arguments.callee['fnSort'+arg] = !arguments.callee['fnSort'+arg];
+        console.log(arguments.callee['fnSort'+arg]);    //true
+		$scope.dataList = $filter('orderBy')($scope.dataList , arg , arguments.callee['fnSort'+arg] );
+		
+	};
+	$scope.fnFilter = function(){
+			$scope.dataList = $filter('filter')( oriArr , $scope.filterVal );
+	};
+
+    $scope.date = $filter('date')(new Date(), 'yyyy-MM-dd hh:mm:ss EEEE');
+    $scope.num = $filter('number')(111111.11111, '2');
+
+    $scope.list = [
+        {name:'kimi',age:3},
+        {name:'cindy',age:4},
+        {name:'anglar',age:4},
+        {name:'shitou',age:6},
+        {name:'tiantian',age:5}
+    ];
+    $scope.listFn = function(e) {
+//        console.log(e);
+        return e.age > 4;
+    };
+
+}]);
+</script>
+</head>
+
+<body>
+<div ng-controller="Aaa">
+	<input type="text" ng-model="filterVal"><input type="button" ng-click="fnFilter()" value="搜索">
+	<table border="1">
+    	<tr>
+        	<th ng-click="fnSort('name')">姓名</th>
+            <th ng-click="fnSort('age')">年龄</th>
+        </tr>
+        <tr ng-repeat="data in dataList">
+        	<td>{{ data.name }}</td>
+            <td>{{ data.age }}</td>
+        </tr>
+    </table>
+
+    <div>{{date}} | {{num}}</div>
+
+    <ul>
+        <li>{{list | filter : 'a'}}</li>
+        <li>{{list | filter : 4}}</li>
+        <li>{{list | filter : {name : 'i'} }}</li>
+        <li>{{list | filter : listFn }}</li>
+    </ul>
+</div>
+</div>
+</body>
+</html>

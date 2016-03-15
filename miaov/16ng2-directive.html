@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>事件指令 ng-selected/change/copy/cut/paste</title>
+<style>
+
+</style>
+<script src="angular.min.js"></script>
+<script>
+
+var m1 = angular.module('myApp',[]);
+m1.controller('Aaa',['$scope',function($scope){
+
+
+}]);
+
+
+
+</script>
+</head>
+
+<body>
+<div ng-controller="Aaa">
+    <input type="checkbox" ng-model="aaa" />    <!--选中ng-model为true ng-selected自动选择-->
+    <select>
+        <option value="11111">11111</option>
+        <option value="22222" ng-selected="aaa">22222</option>
+    </select>
+    <input type="text" ng-change="bbb='hello'" ng-model="bbb" /><p>{{bbb}}</p>  <!--ng-change与ng-model需组合使用-->
+    <input type="text" value="asfdasdfasfasf" ng-copy="ccc='hahaha'" />{{ccc}}  <!--cut/paste一样-->
+
+</div>
+
+</body>
+</html>

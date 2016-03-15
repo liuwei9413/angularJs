@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular.min.js"></script>
+    <script src="jquery-1.11.1.js"></script>
+</head>
+<body>
+
+<div ng-controller="Aaa">
+    <input class="all" type="checkbox" ng-model="yes" />{{name}}
+    <input class="ck" type="checkbox" ng-checked="yes" />1
+    <input class="ck" type="checkbox" ng-checked="yes" />2
+    <input class="ck" type="checkbox" ng-checked="yes" />3
+</div>
+
+
+<script>
+    var myApp = angular.module('myApp', []);
+    myApp.controller('Aaa', ['$scope', function($scope) {
+        $scope.name = '全选';
+
+    }]);
+
+</script>
+
+
+</body>
+</html>

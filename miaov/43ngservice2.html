@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script src="angular.min.js"></script>
+<script>
+var app = angular.module('myApp',[]);
+//app.factory('myService', function() {
+//    return {
+//        name : 'fengge',
+//        showName : function() {
+//            console.log(this.name);
+//        }
+//    }
+//});
+
+app.provider('myService', function() {
+    return {
+        confName : 'liuwei',
+        $get : function() {
+            return {
+                name : 'fengge2',
+                showName : function() {
+                    console.log(this.name);
+                }
+            }
+        }
+    };
+});
+
+//app.factory('randNum', function() {
+//    return {
+//        rand : function(n1, n2) {
+//            return Math.random() * (n2 - n1) + n1;
+//        }
+//    }
+//});
+
+app.provider('randNum', function() {
+    return {
+        bolInt : false,
+        int : function(argBol) {
+            if (argBol)
+                this.bolInt = true;
+            else
+                this.bolInt = false;
+        },
+        $get : function() {
+            console.log(this.bolInt);//false
+            var This = this;
+            return {
+                rand : function(n1, n2) {
+                    return This.bolInt ? Math.round(Math.random() * (n2 - n1) + n1) : Math.random() * (n2 - n1) + n1;
+                }
+            }
+        }
+    }
+});
+
+app.config(['randNumProvider', function(randNumProvider) {
+//    randNumProvider.int(!0);
+    randNumProvider.bolInt = !0;
+}]);
+
+
+
+//app.config(['myServiceProvider', function(myServiceProvider) {
+//    console.log(myServiceProvider)
+//}]);
+
+
+app.controller('myCtrl', ['$scope', 'myService', 'randNum', function($scope, myService, randNum) {
+//    console.log(myService);
+//    myService.showName();
+    $scope.randNum = randNum.rand(1, 10);
+}]);
+
+</script>
+</head>
+
+<body>
+<div ng-controller="myCtrl">
+   {{randNum}}
+</div>
+</body>
+</html>

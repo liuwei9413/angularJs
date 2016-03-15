@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+
+</style>
+<script src="angular.min.js"></script>
+<script>
+
+var m1 = angular.module('myApp',[]);
+m1.controller('Aaa',['$scope',function($scope){
+	$scope.username = {
+        val : 'default',
+        list : [
+            {name : 'default', tips : '请输入用户名'},
+            {name : 'required', tips : '用户名不能为空'},
+            {name : 'pattern', tips : '用户名必须为字符串'},
+            {name : 'pass', 'tips': '√'}
+        ]
+    };
+    $scope.password = {
+        val : 'default',
+        list : [
+            {name : 'default', tips : '请输入密码'},
+            {name : 'required', tips : '密码不能为空'},
+            {name : 'minlength', tips : '密码至少六位'},
+            {name : 'pass', 'tips': '√'}
+        ]
+    };
+    $scope.password_again = {
+        val : 'default',
+        list : [
+            {name : 'default', tips : '请再次输入密码'},
+            {name : 'required', tips : '请再次输入密码'},
+            {name : 'equal', tips : '密码不一致'},
+            {name : 'pass', 'tips': '√'}
+        ],
+        checkPassword : function(err) {
+            console.log(err);
+            if (err.required) {
+                this.val = 'required';
+                return;
+            }
+
+            this.val = $scope.myPassword == $scope.myPassword_again ? 'pass' : 'equal';
+        }
+    };
+
+    $scope.check = function(obj, err) {
+        for (var attr in err) {
+            if (err[attr]) {
+                obj.val = attr;
+                return;
+            }
+        };
+        obj.val = 'pass';
+    };
+
+
+}]);
+
+
+
+</script>
+</head>
+
+<body>
+<div ng-controller="Aaa">
+    <form novalidate name="nForm">
+        <div>
+            <label for="username">用户名：</label>
+            <input type="text" id="username" name="username" required ng-pattern="/^[a-zA-Z]+$/" ng-model="myName" ng-blur="check(username, nForm.username.$error)" />
+            <span ng-repeat="n in username.list | filter:username.val">{{n.tips}}</span>
+        </div>
+        <div>
+            <label for="password">密码：</label>{{myPassword}}
+            <input type="password" id="password" name="password" ng-value="myPassword" required ng-minlength="6" ng-model="myPassword" ng-blur="check(password, nForm.password.$error)" />
+            <span ng-repeat="n in password.list | filter:password.val">{{n.tips}}</span>
+        </div>
+        <div>
+            <label for="password_again">确认密码：</label>
+            <input type="password" id="password_again" name="password_again" required ng-model="myPassword_again" ng-blur="password_again.checkPassword(nForm.password_again.$error)" />
+            <span ng-repeat="n in password_again.list | filter:password_again.val">{{n.tips}}</span>
+        </div>
+    </form>
+</div>
+</body>
+</html>

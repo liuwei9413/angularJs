@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+
+<script src="angular.min.js"></script>
+<script>
+
+var app = angular.module('myApp', []);
+app.directive('myHello', function() {
+    return {
+        restrict : 'A',
+        replace : true,
+//        template : '<div>i am a div element</div>'
+        templateUrl : 'temp.html'
+    };
+
+});
+
+</script>
+</head>
+
+<body>
+<!--<my-hello></my-hello>-->
+
+<p my-hello></p>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+    #div1 div,#div2 div{ width: 200px; height: 200px; border: 1px solid #ccc; display: none;}
+    #div1 input.active,#div2 input.active { background: #f00;}
+</style>
+<script src="jquery-1.11.1.js"></script>
+<script src="angular.min.js"></script>
+<script>
+
+var app = angular.module('myApp', []);
+app.directive('myTab', function() {
+    return {
+        restrict : 'E',
+        replace : true,
+        scope : {
+            myId : '@myId',  //@:字符串解析
+            myData: '=myData'
+        },
+        controller : ['$scope',function($scope){
+
+        }],
+        link: function(scope, element, attr) {
+            console.log(element.find('input').size());//0
+            element.delegate('input', 'click', function() {
+                $(this).addClass('active').siblings('input').removeClass('active')
+                        .siblings('div').eq($(this).index()).show().siblings('div').hide();
+            });
+        },
+        templateUrl : 'temp5.html'
+    };
+});
+
+app.controller('Aaa',['$scope',function($scope){
+
+    $scope.data1 = [
+        {title: '语文', content: '1111111111'},
+        {title: '数学', content: '2222222222'},
+        {title: '英语', content: '3333333333'}
+    ];
+
+    $scope.data2 = [
+        {title: '物理', content: '4444444444'},
+        {title: '化学', content: '5555555555'}
+    ];
+}]);
+</script>
+</head>
+
+<body ng-controller="Aaa">
+
+<my-tab my-id="div1" my-data="data1"></my-tab>
+<my-tab my-id="div2" my-data="data2"></my-tab>
+
+
+</body>
+</html>

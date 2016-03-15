@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>ng-class用法</title>
+<style>
+.active1{ background:red;}
+.active2{ background:blue;}
+</style>
+<script src="angular.min.js"></script>
+<script>
+
+var m1 = angular.module('myApp',[]);
+m1.controller('Aaa',['$scope',function($scope){
+	
+	$scope.dataList = [
+		'aaaaa' , 'bbbbb' , 'cccccc' , 'dddddd' , 'eeeeee'
+	];
+    $scope.isActive = true;
+    $scope.isActive2 = true;
+
+}]);
+
+
+
+</script>
+</head>
+
+<body>
+<div ng-controller="Aaa">
+	<ul>
+    	<!--<li ng-repeat=" data in dataList ">{{ $even }}</li>-->
+        <li class="{{ $even ? 'active1' : 'active2' }}" ng-repeat=" data in dataList ">{{ data }}</li>
+        <!--<li class="{{ isActive ? 'active1' : 'active2' }}" ng-repeat="data in dataList">{{data}}</li>-->
+        <!--<li ng-class="{true:'active1',false:'active2'}[isActive]" ng-repeat="data in dataList">{{data}}</li>-->
+        <!--<li ng-class="{'active1':isActive, 'active2':isActive2}" ng-repeat="data in dataList">{{data}}</li>-->
+    </ul>
+    
+    <div ng-repeat-start="data in dataList">{{data}}</div>
+    <p>{{data}}</p>
+    <div ng-repeat-end>{{data}}</div>
+
+    <div ng-repeat="data in dataList">
+        <p>{{data}}</p>
+        <span>{{data}}</span>
+    </div>
+    
+</div>
+
+
+
+</body>
+</html>

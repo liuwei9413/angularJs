@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>ng-disabled ng-readonly ng-checked</title>
+
+<script src="angular.min.js"></script>
+<script>
+var app = angular.module('myApp', []);
+app.controller('disabledTest', ['$scope','$interval', function($scope, $interval) {
+    var iNow = 5;
+    $scope.text = iNow + '秒';
+    $scope.isOk = true;
+    var timer = $interval(function() {
+        iNow--;
+        $scope.text = iNow + '秒';
+        if (iNow <= 0) {
+            $interval.cancel(timer);
+            $scope.isOk = false;
+            $scope.text = '可以点击';
+        };
+    }, 1000);
+
+}]);
+    
+</script>
+
+</head>
+
+<body>
+<div ng-controller="disabledTest">
+    <input type="button" value="{{text}}" ng-disabled="isOk" />
+    <input type="text" ng-value="text" ng-readonly="isOk" />
+    <input type="text" ng-value="text" ng-disabled="isOk" />
+    <input type="checkbox" ng-checked="isOk" />
+</div>
+
+<script>
+
+</script>
+</body>
+</html>

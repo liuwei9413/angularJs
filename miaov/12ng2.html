@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script src="angular.min.js"></script>
+<script>
+
+var m1 = angular.module('myApp',[]);
+
+m1.filter('firstUpper', function() {
+    return function(str) {
+        return str.charAt(0).toUpperCase() + str.substring(1);
+    };
+});
+
+m1.controller('Aaa',['$scope','$filter',function($scope,$filter){
+    $scope.name1 = 123456789.12345;
+    $scope.name11 = $filter('currency')(123456789.12345, '￥');
+
+    $scope.name111 = $filter('number')(123456789.2468, '3');
+    console.log($scope.name111);    //123,456,789.246 保留小数点后三位，不进行四舍五入
+
+    $scope.name2 = 'Hello World';
+
+    $scope.name3 = {'name':'liuwei', 'age':'25'};
+
+    $scope.name4 = ['a','b','c','d'];
+    $scope.name44 = $filter('limitTo')('helloworld', 4);
+
+    $scope.name5 = [
+        {color : 'red', age : 30},
+        {color : 'green', age : 10},
+        {color : 'black', age : 20}
+    ];
+    $scope.name55 = $filter('filter')($scope.name5, 'e');
+
+    $scope.name6 = 1448866172560;
+
+    $scope.name7 = 'hello';
+    $scope.name77 = $filter('firstUpper')('aaa');
+}]);
+
+
+
+</script>
+</head>
+
+<body>
+<div ng-controller="Aaa">
+    <p>{{ name11 }}</p>
+    <p>curreny: {{ name1 | currency : '￥' }}</p>
+    <p>number: {{ name1 | number : 4 }}</p>
+    <p>uppercase: {{ name2 | uppercase }}</p>
+    <pre>json:  {{ name3 | json }}</pre>
+    <p>limitTo: {{ name2 | limitTo:2 }}</p>
+    <p>limitTo: {{ name4 | limitTo:3 }}</p>
+    <p>{{ name44 }}</p>
+    <p>filter: {{ name5 | filter : '20' }}</p>
+    <p>filter: {{ name5 | filter : 'red' : true }}</p>
+    <p>filter:name55 {{ name55 }}</p>
+    <p>date: {{ name6 | date : 'yyyy-MM-dd HH:mm:ss' }}</p>
+    <p>orderBy: {{ name5 | orderBy : 'age' }}</p>
+    <p>orderBy: {{ name5 | orderBy : 'age' : true }}</p>
+    <p>{{ name7 | firstUpper }}</p>
+    <p>{{ name77 }}</p>
+</div>
+</body>
+</html>

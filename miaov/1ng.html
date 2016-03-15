@@ -1,0 +1,76 @@
+<!--
+<!DOCTYPE HTML>
+<html ng-app="">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script src="angular.min.js"></script>
+
+</head>
+
+<body>
+<div ng-controller="Aaa">
+	<p>{{name}}</p>
+    
+    <div ng-controller="Bbb">
+        <p>{{name}}</p>
+        <p>{{age}}</p>
+    </div>
+    
+</div>
+<script>
+
+    /*function Aaa($scope){
+     $scope.name = 'hello';
+     $scope.age = '20';
+     }*/
+    function Aaa($scope,$rootScope){
+        $scope.name = 'hello';
+        $scope.age = '40';
+        $rootScope.age = '20';
+    }
+    function Bbb($scope){
+        $scope.name = 'hi';
+        $scope.age = '30';
+    }
+
+</script>
+</body>
+</html>
+-->
+
+
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script src="angular.min.js"></script>
+
+</head>
+
+<body>
+<!--MVC 请求数据通过C的规则处理M并返回M给V  V查找数据 按照作用域原则 由内到外  -->
+
+<div ng-controller="Aaa">
+    'name': {{name}}<br />
+    'age': {{age}}
+</div>
+
+<div>另一个div，没有指定controller. 'age': {{age}}</div>
+
+<script>
+var myApp = angular.module('myApp', []);
+
+myApp.run(['$rootScope', function($rootScope) {
+    $rootScope.age = '公共年龄25';
+}]);
+
+myApp.controller('Aaa', ['$scope', function($scope) {
+    $scope.name = 'fengge';
+    $scope.age = '私有年龄25';
+}])
+
+</script>
+</body>
+</html>

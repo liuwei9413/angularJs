@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>$watch测试</title>
+<script src="angular.min.js"></script>
+<script>
+var m1 = angular.module('myApp', []);
+m1.controller('Watch_test', ['$scope', function($scope) {
+    $scope.iphone = {
+        price : 5,
+        num : 1,
+        free : 10
+    };
+
+    $scope.iphone.sum = function() {
+        return $scope.iphone.price * $scope.iphone.num;
+    };
+
+    $scope.$watch($scope.iphone.sum, function(newVal, oldVal) {
+        $scope.iphone.free = newVal >= 100 ? 0 : 10;
+        $scope.iphone.prices = $scope.iphone.free + $scope.iphone.sum();
+    });
+
+
+}]);
+
+
+</script>
+</head>
+
+<body>
+
+<div ng-controller="Watch_test">
+    <div>单价：<input type="text" ng-model="iphone.price" /></div>
+    <div>数量：<input type="text" ng-model="iphone.num" /></div>
+    <div>费用：{{ iphone.sum() | currency : '￥' }}</div>
+    <div>运费：{{ iphone.free | currency : '￥' }}</div>
+    <div>合计：{{ iphone.free + iphone.sum() | currency : '￥' }}</div>
+</div>
+
+
+</body>
+</html>
