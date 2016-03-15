@@ -36,7 +36,7 @@ m1.controller('Aaa',['$scope','$filter',function($scope,$filter){
 	
 //	$scope.name = 'hello';
 	
-//	$scope.name = $filter('firstUpper')('hello');
+	$scope.name = $filter('firstUpper')('hello');
 	
 
 }]);
@@ -53,10 +53,10 @@ m1.controller('Aaa',['$scope','$filter',function($scope,$filter){
     <!--<p>{{ name | uppercase }}</p>-->
     <!--<pre style="background: #eee; border: 2px solid #ccc">{{ name | json }}</pre>-->
     <!--<p>{{ name | date : 'yyyy' }}</p>-->
-    <p>{{ name | orderBy : 'age' : true }}</p>
+    <!--<p>{{ name | orderBy : 'age' : true }}</p>-->
     <!--<p>{{ name | filter : 'o' }}</p>-->
     <!--<p>{{ name | limitTo : 2 | uppercase }}</p>-->
-    <!--<p>{{ name | firstUpper : 2 }}</p>-->
+    <p>{{ name | firstUpper : 2 }}</p>
     <!--<p>{{ name }}</p>-->
 </div>
 </body>

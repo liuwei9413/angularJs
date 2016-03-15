@@ -17,34 +17,37 @@ m1.controller('Aaa',['$scope','$filter',function($scope,$filter){
 		{ name : "blue" , age : "30" },
 		{ name : "green" , age : "10" }
 	];
-	
+	var isTrue = {};
+
 	$scope.dataList = oriArr;
 
 	$scope.fnSort = function(arg){
-        console.log(arguments.callee['fnSort'+arg]);    //undefined
-		arguments.callee['fnSort'+arg] = !arguments.callee['fnSort'+arg];
-        console.log(arguments.callee['fnSort'+arg]);    //true
-		$scope.dataList = $filter('orderBy')($scope.dataList , arg , arguments.callee['fnSort'+arg] );
+//        console.log(arguments.callee['fnSort'+arg]);    //undefined
+//		arguments.callee['fnSort'+arg] = !arguments.callee['fnSort'+arg];
+        isTrue[arg] = !isTrue[arg];
+//        console.log(obj);    //
+		$scope.dataList = $filter('orderBy')($scope.dataList , arg , isTrue[arg] );
 		
 	};
 	$scope.fnFilter = function(){
 			$scope.dataList = $filter('filter')( oriArr , $scope.filterVal );
 	};
 
-    $scope.date = $filter('date')(new Date(), 'yyyy-MM-dd hh:mm:ss EEEE');
-    $scope.num = $filter('number')(111111.11111, '2');
+//    $scope.date = $filter('date')(new Date(), 'yyyy-MM-dd hh:mm:ss EEEE');
+//    $scope.num = $filter('number')(111111.11111, '2');
 
-    $scope.list = [
-        {name:'kimi',age:3},
-        {name:'cindy',age:4},
-        {name:'anglar',age:4},
-        {name:'shitou',age:6},
-        {name:'tiantian',age:5}
-    ];
-    $scope.listFn = function(e) {
-//        console.log(e);
-        return e.age > 4;
-    };
+//    $scope.list = [
+//        {name:'kimi',age:3},
+//        {name:'cindy',age:4},
+//        {name:'anglar',age:4},
+//        {name:'shitou',age:6},
+//        {name:'tiantian',age:5}
+//    ];
+//    $scope.listFn = function(e) {
+////        console.log(e);
+//        return e.age > 4;
+//    };
+    
 
 }]);
 </script>
@@ -64,14 +67,14 @@ m1.controller('Aaa',['$scope','$filter',function($scope,$filter){
         </tr>
     </table>
 
-    <div>{{date}} | {{num}}</div>
+    <!--<div>{{date}} | {{num}}</div>-->
 
-    <ul>
-        <li>{{list | filter : 'a'}}</li>
-        <li>{{list | filter : 4}}</li>
-        <li>{{list | filter : {name : 'i'} }}</li>
-        <li>{{list | filter : listFn }}</li>
-    </ul>
+    <!--<ul>-->
+        <!--<li>{{list | filter : 'a'}}</li>-->
+        <!--<li>{{list | filter : 4}}</li>-->
+        <!--<li>{{list | filter : {name : 'i'} }}</li>-->
+        <!--<li>{{list | filter : listFn }}</li>-->
+    <!--</ul>-->
 </div>
 </div>
 </body>
