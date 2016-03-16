@@ -25,14 +25,15 @@ m1.controller('Aaa',['$scope',function($scope){
 	$scope.regPassword = {
 		regVal : 'default',
 		regList : [
-			{ name : 'default' , tips : '请输入密码'},
-			{ name : 'required' , tips : '密码不能为空'},
-			{ name : 'minlength' , tips : '密码至少6位'},
-			{ name : 'pass' , tips : '√'}
-		]
+            { name : 'default' , tips : '请输入密码'},
+            { name : 'required' , tips : '密码不能为空'},
+            { name : 'minlength' , tips : '密码至少6位'},
+            { name : 'pass' , tips : '√'}
+        ]
 	};
 	
 	$scope.change = function( reg , err ){
+//        console.log(err);   //{required: true, pattern: false}
 		for(var attr in err){
 			if( err[attr] == true ){
 				$scope[reg].regVal = attr;

@@ -24,7 +24,7 @@ app.directive('myTab', function() {
         controller : ['$scope',function($scope){
             $scope.name = 'miaov';
             $scope.show = function(num) {
-                alert(num);
+                alert('nei:'+num);
             }
         }],
         templateUrl : 'temp4.html'
@@ -35,7 +35,7 @@ app.controller('Aaa',['$scope',function($scope){
 
     $scope.name = 'hello';
     $scope.show = function(n){
-        alert(n);
+        alert('wai:'+n);
     };
 
 }]);

@@ -8,7 +8,8 @@
 
 var m1 = angular.module('myApp',[]);
 m1.controller('Aaa',['$scope','$location',function($scope,$location){
-	
+
+    console.log($location.absUrl())
 	//var a = $location.absUrl();
 	$location.path('aaa/bbb/ccc').replace();
 	$location.hash('hello');

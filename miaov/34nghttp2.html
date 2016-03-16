@@ -20,10 +20,10 @@ m1.controller('Aaa',['$scope','$http','$timeout',function($scope,$http,$timeout)
 			$http({
 				method : 'JSONP',
 				url : 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+name+'&cb=JSON_CALLBACK'
-			}).success(function(data){
-				console.log(data.s);
-				$scope.data = data.s;
-			});
+			}).then(function(res) {
+                console.log(res.data);
+                $scope.data = res.data.s;
+            });
 		
 		},500);
 		

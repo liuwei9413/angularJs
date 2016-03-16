@@ -13,6 +13,8 @@ m1.controller('Aaa',['$scope','$http',function($scope,$http){
 		method : 'GET',
 		url : 'data.php'
 	}).success(function(data,state,headers,config){
+        $scope.name = data;
+        console.log(data);
 		console.log(state);
 	}).error(function(data,state){
         if (state == 404) {
@@ -39,6 +41,7 @@ m1.controller('Aaa',['$scope','$http',function($scope,$http){
 
 <body>
 <div ng-controller="Aaa">
+    {{name}}
 </div>
 </body>
 </html>
