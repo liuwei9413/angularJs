@@ -1,0 +1,29 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://E:/works/yitaiFront/src/main/webapp/resources/front/js/myCenter/selectRoleCtrl.min.js" />
+        <item url="file://E:/works/yitaiFront/src/main/webapp/resources/front/js/informationCtrl/piliangdaoruStudentCtrl.min.min.js" />
+        <item url="file://$PROJECT_DIR$/service-$http.min.js" />
+        <item url="file://E:/works/Front2.2/yitaiFront/src/main/webapp/common/ipconfig.min.js" />
+        <item url="file://E:/works/yitaiFront/src/main/webapp/resources/front/js/informationCtrl/testPrepareMainCtrl.min.js" />
+        <item url="file://E:/works/yitaiFront/src/main/webapp/resources/front/js/informationCtrl/piliangdaoruStudentCtrl.min.js" />
+        <item url="file://E:/works/Front2.2/yitaiFront/src/main/webapp/resources/front/js/reportCtrl/queryReportCtrl.min.js" />
+        <item url="file://$PROJECT_DIR$/server-http.min.js" />
+        <item url="file://E:/works/yitaiFront/src/main/webapp/resources/front/js/myCenter/evaluationQueryCtrl.min.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://E:/works/yitaiFront/src/main/webapp/resources/front/js/myCenter/selectRoleCtrl.min.js" />
+      <root url="file://E:/works/yitaiFront/src/main/webapp/resources/front/js/informationCtrl/piliangdaoruStudentCtrl.min.min.js" />
+      <root url="file://$PROJECT_DIR$/service-$http.min.js" />
+      <root url="file://E:/works/Front2.2/yitaiFront/src/main/webapp/common/ipconfig.min.js" />
+      <root url="file://E:/works/yitaiFront/src/main/webapp/resources/front/js/informationCtrl/testPrepareMainCtrl.min.js" />
+      <root url="file://E:/works/yitaiFront/src/main/webapp/resources/front/js/informationCtrl/piliangdaoruStudentCtrl.min.js" />
+      <root url="file://E:/works/Front2.2/yitaiFront/src/main/webapp/resources/front/js/reportCtrl/queryReportCtrl.min.js" />
+      <root url="file://$PROJECT_DIR$/server-http.min.js" />
+      <root url="file://E:/works/yitaiFront/src/main/webapp/resources/front/js/myCenter/evaluationQueryCtrl.min.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

@@ -14,7 +14,17 @@ var m1 = angular.module('myApp',[]);
 m1.controller('Aaa',['$scope',function($scope){
 	
 	$scope.text = 'hello';
-	
+
+    $scope.users = [
+        {name:'a',id:'1'},
+        {name:'b',id:'2'},
+        {name:'c',id:'3'}
+    ];
+//    $scope.selected='2';//id的值，区分类型
+    $scope.selected=$scope.users[0].id;//如果想要第一个值
+    $scope.fn = function() {
+        console.log($scope.selected);
+    }
 }]);
 
 
@@ -31,6 +41,8 @@ m1.controller('Aaa',['$scope',function($scope){
         <div>{{ myForm.myText.$pristine }}</div><!--是否为原来值 修改过 即为false-->
         <div>{{ myForm.myText.$dirty }}</div><!--是否不是原来值 修改过 即为true-->
         <div>{{ myForm.myText.$error }}</div><!--required pattern minlength 等验证错误是否有错-->
+
+        <select ng-model="selected" ng-options="x.id as x.name for x in users" ng-change="fn();"></select>
     </form>
 </div>
 </body>

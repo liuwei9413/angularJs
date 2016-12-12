@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script src="angular.min.js"></script>
+<script src="server-http.js"></script>
+<script>
+var m2 = angular.module('myApp',['module1']);
+m2.controller('Aaa',['$scope','db',function($scope,db){
+	var url = 'http://60.205.115.173:8081/yitaireport/report/getTitleDetail';
+	var parama = {
+		trialId:105,
+		cityId:530100,
+		areaId:530181,
+		roleType:10,
+		templateType:20
+	};
+	db.getData(url, parama).then(function(resData) {
+		console.log( resData );
+	}, function(error) {
+
+	})
+}]);
+</script>
+</head>
+
+<body>
+<div ng-controller="Aaa">
+</div>
+</body>
+</html>

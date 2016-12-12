@@ -1,31 +1,42 @@
 <!DOCTYPE HTML>
-<html ng-app>
+<html ng-app="myApp">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>无标题文档</title>
-<script src="angular.min.js"></script>
+<!--<script src="angular.min.js"></script>-->
+	<script src="angular1.min.js"></script>
 <script>
-
-function Aaa($scope,$timeout){
+var m1 = angular.module('myApp',[]);
+m1.controller('Aaa',['$scope','$filter',function($scope,$filter){
 	$scope.iphone = {
 		money : 5,
 		num : 1,
 		fre : 10
 	};
 	$scope.sum = function(){
+		console.log($scope.iphone.money);
 		return $scope.iphone.money * $scope.iphone.num;
 	};
-	
+
 	$scope.$watch($scope.sum,function(newVal,oldVal){
 		//console.log(newVal);
 		//console.log(oldVal);
-		
+//		debugger;
+
 		$scope.iphone.fre = newVal >= 100 ? 0 : newVal <= 0 ? 0 : 10;
 //		$scope.iphone.fre = newVal >= 100 ? 0 : newVal <= 0 ? 0 : 10;
 
 	});
-	
-}
+
+	$scope.ssFilterVal = 1;
+	$scope.ssFilterValFn = function() {
+		return $scope.ssFilterVal;
+	}
+	$scope.$watch($scope.ssFilterValFn, function(newVal, oldVal) {
+		console.log(newVal);
+	})
+}]);
+
 
 </script>
 </head>
@@ -38,6 +49,8 @@ function Aaa($scope,$timeout){
     <p>费用:<span>{{ sum() | currency:'￥' }}</span></p>
     <p>运费:<span>{{iphone.fre | currency:'￥'}}</span></p>
     <p>总额:<span>{{ sum() + iphone.fre | currency:'￥'}}</span></p>
+
+	<input type="text" ng-model="ssFilterVal">
 </div>
 
 

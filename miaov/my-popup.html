@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+    <style>
+        /*弹出框样式*/
+        * {
+            margin:0;
+            padding:0;
+        }
+        .disnone {
+            display: none !important;
+        }
+        .disblock {
+            display: block !important;
+        }
+        .lm-popup {
+            display: none;
+            position: absolute;
+            z-index: 99999;
+            top: 200px;
+            left: 380px;
+            margin-left: -135px;
+            padding: 10px 15px 15px 15px;
+            width: 240px;
+            font-size: 12px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 8px #ccc;
+        }
+        .lm-popup .lm-popup-item-delete {
+            margin: 35px 0 30px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4a5b62;
+        }
+        .lm-popup .lm-popup-item span {
+            margin-right: 14px;
+            height: 34px;
+            line-height: 34px;
+            color: #a4aac7;
+        }
+        .lm-popup .lm-popup-item input {
+            padding: 0 8px;
+            width: 54%;
+            height: 30px;
+            line-height: 30px;
+            color: #a6adba;
+            background: #f0f2f6;
+            border: 1px solid #d4e0e5;
+        }
+        .lm-popup .lm-popup-btns {
+            margin: 20px 0;
+            padding: 0 25px;
+        }
+        .lm-popup .lm-popup-btns a {
+            width: 80px;
+            height: 34px;
+            line-height: 34px;
+            text-align: center;
+            font-size: 14px;
+            letter-spacing: 1px;
+            border-radius: 25px;
+        }
+        .lm-popup .lm-popup-btns .lm-popup-cancelbtn {
+            float: left;
+            color: #4daffd;
+            background: #f7f7fa;
+        }
+        .lm-popup .lm-popup-btns .lm-popup-cancelbtn:hover {
+            color: #8b9aaa;
+        }
+        .lm-popup .lm-popup-btns .lm-popup-confirmbtn {
+            float: right;
+            color: #fff;
+            background: #4daffd;
+        }
+        .lm-popup .lm-popup-btns .lm-popup-confirmbtn:hover {
+            width: 78px;
+            height: 32px;
+            line-height: 32px;
+            color: #4daffd;
+            background: #fff;
+            border: 1px solid #4daffd;
+        }
+        .lm-popup .lm-popup-btns-delete .lm-popup-confirmbtn {
+            float: left;
+        }
+        .lm-popup .lm-popup-btns-delete .lm-popup-cancelbtn {
+            float: right;
+        }
+        .lm-popup .lm-popup-closebtn {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            width: 21px;
+            height: 21px;
+            background: url("../../imgs/information-img/cm-img/close-icon.png") no-repeat center center;
+        }
+        .lm-popup-mark {
+            display: none;
+            position: absolute;
+            top:0;
+            left:0;
+            z-index:1000;
+            width:100%;
+            height:100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+<script src="jquery-1.11.1.js"></script>
+<script src="angular.min.js"></script>
+<script>
+
+var app = angular.module('myApp', []);
+app.directive('myPopup', function() {
+    return {
+        restrict : 'E',
+        replace : true,
+        scope : {
+            conf: '=conf'
+        },
+        controller : ['$scope',function($scope){
+        }],
+        link: function(scope, element, attr) {
+            if ( !scope.conf.isShow ) {
+                scope.conf.isShow = false;
+            }
+            if ( !scope.conf.title ) {
+                scope.conf.title = '是否确定删除，删除不可恢复！';
+            }
+            if ( !scope.conf.confirm ) {
+                scope.conf.confirm = function() {
+                    scope.conf.isShow = false;
+                }
+            }
+            if ( !scope.conf.cancel ) {
+                scope.conf.cancel = function() {
+                    scope.conf.isShow = false;
+                }
+            }
+        },
+        template: '<div class="lm-popup" ng-class="{\'disblock\':conf.isShow, \'disnone\':!conf.isShow}">\
+                        <div class="lm-popup-item lm-popup-item-delete" ng-bind="conf.title"></div>\
+                        <div class="lm-popup-btns lm-popup-btns-delete">\
+                        <a class="lm-popup-confirmbtn" href="javascript:;" ng-click="conf.confirm();">确定</a>\
+                        <a class="lm-popup-cancelbtn" href="javascript:;" ng-click="conf.cancel();">取消</a>\
+                        </div>\
+                        <a class="lm-popup-closebtn" href="javascript:;" ng-click="conf.cancel();"></a>\
+                    </div>'
+        /*template : '<div class="lm-popup" ng-class="{\'disblock\':conf.isShow, \'disnone\':!conf.isShow}">'+
+                            '<div class="lm-popup-item lm-popup-item-delete" ng-bind="conf.title"></div>'+
+                            '<div class="lm-popup-btns lm-popup-btns-delete">'+
+                                '<a class="lm-popup-confirmbtn" href="javascript:;" ng-click="conf.confirm();">确定</a>'+
+                                '<a class="lm-popup-cancelbtn" href="javascript:;" ng-click="conf.cancel();">取消</a>'+
+                            '</div>'+
+                            '<a class="lm-popup-closebtn" href="javascript:;" ng-click="conf.cancel();"></a>'+
+                        '</div>'*/
+//        templateUrl: 'popup-template.html'
+    };
+});
+
+app.controller('Aaa',['$scope',function($scope){
+    $scope.popupConf = {
+        isShow: true,
+        confirm: function() {
+            this.isShow = false;
+            alert('点击了确定按钮');
+        }
+    }
+}]);
+</script>
+</head>
+
+<body ng-controller="Aaa">
+
+<my-popup conf="popupConf"></my-popup>
+
+
+</body>
+</html>

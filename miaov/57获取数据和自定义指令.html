@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script src="angular.min.js"></script>
+	<script src="echarts3.2.3.min.js"></script>
+	<script src="tmplUtils.js"></script>
+<script src="server-http.js"></script>
+<script src="directive.js"></script>
+<script>
+var app = angular.module('myApp',['module1', 'dM']);
+
+/*var jsonTree = [
+	{
+		"title": "第一部分",	//菜单标题
+		"options": {	//配置参数
+			"boxId": "bg2",	//容器Id
+			"templateSn": "036",	//模块Id
+			"dimenId": 6,	//dimension=>维度Id
+			"isShow": 0,	//菜单默认状态:是否展开 0=>不展开 1=>展开
+		},
+		"list": []
+	}
+];*/
+
+app.controller('Aaa',['$scope','$sce','db',function($scope,$sce,db){
+	$scope.url = 'http://60.205.115.173:8081/yitaireport/reportMain/getTempleteData';
+	$scope.params = {
+		dimenId:6,
+		areaId:361021,
+		trialId:96,
+		schoolType:'mid',
+		roleType:0,
+		templateSn:'036',
+		templateType:20,
+		schoolTypeDetail:'mid',
+	};
+	$scope.params2 = {
+		dimenId:6,
+		areaId:361021,
+		trialId:96,
+		schoolType:'mid',
+		roleType:0,
+		templateSn:'036',
+		templateType:20,
+		schoolTypeDetail:'hig',
+	};
+}]);
+</script>
+</head>
+
+<body>
+<div ng-controller="Aaa">
+	<my-chart my-id="div1" my-params="params" my-url="url"></my-chart>
+	<my-chart my-id="div2" my-params="params2" my-url="url"></my-chart>
+</div>
+</body>
+</html>

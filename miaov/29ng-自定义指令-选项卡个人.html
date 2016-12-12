@@ -24,7 +24,9 @@ app.directive('myTab', function() {
 
         }],
         link: function(scope, element, attr) {
+            console.log(element);
             console.log(element.find('input').size());//0
+            scope.aa = 'div10';
             element.delegate('input', 'click', function() {
                 $(this).addClass('active').siblings('input').removeClass('active')
                         .siblings('div').eq($(this).index()).show().siblings('div').hide();

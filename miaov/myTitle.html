@@ -1,0 +1,7 @@
+<div id="{{myId}}_box" ng-class="">
+    <!--<h1>{{ data.cityName }}</h1>-->
+    <div class="introduce" ng-bind-html="hText" ng-if="hText != null && hText != ''"></div>
+    <div id="{{myId}}" ng-style="globalChartsCss"  class="myEcharts" style="width: 1000px; height: 500px;">
+    </div>
+    <div class="introduce" ng-bind-html="fText" ng-if="fText != null && fText != ''"></div>
+</div>

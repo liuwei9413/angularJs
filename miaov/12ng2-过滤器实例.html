@@ -33,7 +33,15 @@ m1.controller('Aaa',['$scope','$filter',function($scope,$filter){
         {color : 'green', age : 10},
         {color : 'black', age : 20}
     ];
-    $scope.name55 = $filter('filter')($scope.name5, 'e');
+    $scope.name5Filter = '';
+    $scope.name5FilterFn = function() {
+        return $scope.name5Filter;
+    }
+
+    $scope.$watch($scope.name5FilterFn, function(newVal, oldVal) {
+//        debugger;
+        $scope.name55 = $filter('filter')($scope.name5, {'color':newVal});
+    });
 
     $scope.name6 = 1448866172560;
 
@@ -56,7 +64,14 @@ m1.controller('Aaa',['$scope','$filter',function($scope,$filter){
     <p>limitTo: {{ name2 | limitTo:2 }}</p>
     <p>limitTo: {{ name4 | limitTo:3 }}</p>
     <p>{{ name44 }}</p>
-    <p>filter: {{ name5 | filter : '20' }}</p>
+
+    <div style="border: 1px solid #ccc; padding: 20px;">
+        <input type="text" ng-model="name5Filter">
+        <p>input filter: {{ name5 | filter : name5Filter }}</p>
+        <!--<p ng-if="(name5.lenght==0) | filter : name5Filter">name5没有数据，所以我出现了！</p>-->
+    </div>
+
+
     <p>filter: {{ name5 | filter : 'red' : true }}</p>
     <p>filter:name55 {{ name55 }}</p>
     <p>date: {{ name6 | date : 'yyyy-MM-dd HH:mm:ss' }}</p>

@@ -1,0 +1,9 @@
+
+<div class="lm-popup" ng-class="{'disblock':conf.isShow, 'disnone':!conf.isShow}">
+    <div class="lm-popup-item lm-popup-item-delete" ng-bind="conf.title"></div>
+    <div class="lm-popup-btns lm-popup-btns-delete">
+        <a class="lm-popup-confirmbtn" href="javascript:;" ng-click="conf.confirm();">确定</a>
+        <a class="lm-popup-cancelbtn" href="javascript:;" ng-click="conf.cancel();">取消</a>
+    </div>
+    <a class="lm-popup-closebtn" href="javascript:;" ng-click="conf.cancel();"></a>
+</div>
